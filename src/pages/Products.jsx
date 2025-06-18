@@ -49,15 +49,15 @@ export default function Products() {
         <td>{produit.categorie}</td>
         <td>{produit.stock}</td>
         <td className="space-x-2">
-          <Link to={`/produits/${produit.id}`} className="text-blue-600 rounded">
+          <Link to={`/produits/${produit.id}`} className="text-blue-600 hover:underline">
             Voir
           </Link>
-          <Link to={`/produits/${produit.id}/edit`} className="text-yellow-600 rounded px-2 py-1">
+          <Link to={`/produits/${produit.id}/edit`} className="text-yellow-600 hover:underline">
             Modifier
           </Link>
           <button
             onClick={handleDelete}
-            className="text-red-600 rounded px-2 py-1"
+            className="bg-red-600 text-white px-2 py-1 rounded"
           >
             Supprimer
           </button>
