@@ -1,27 +1,13 @@
 import { Link, useLocation } from 'react-router-dom';
-import api from '../services/api';
-import { useEffect, useState } from 'react';
 import {
   HomeIcon,
   CubeIcon,
   ArrowsRightLeftIcon,
   ArrowLeftOnRectangleIcon,
-  BellIcon
 } from '@heroicons/react/24/outline';
 
 export default function Sidebar() {
   const location = useLocation();
-
-  const [alerteCount, setAlerteCount] = useState(0);
-
-  useEffect(() => {
-    api.get('/produits')
-      .then(res => {
-        const alertes = res.data.filter(p => p.stock <= p.seuil_alerte);
-        setAlerteCount(alertes.length);
-      })
-      .catch(err => console.error('Erreur chargement alertes:', err));
-  }, []);
 
   // Fonction pour tester si une route est active
   const isActive = (path) => location.pathname.startsWith(path);
@@ -47,15 +33,6 @@ export default function Sidebar() {
         </Link>
         <Link to="/dashboard" className="flex items-center gap-2 text-red-500 hover:underline">
           <ArrowLeftOnRectangleIcon className="h-5 w-5" /> Accueil
-        </Link>
-        <Link to="/alertes" className="relative hover:underline">
-          <BellIcon className="h-6 w-6 text-gray-700" />
-
-          {alerteCount > 0 && (
-            <span className="absolute -top-1 -right-2 bg-red-600 text-white text-xs rounded-full px-1.5">
-              {alerteCount}
-            </span>
-          )}
         </Link>
       </nav>
     </aside>
