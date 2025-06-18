@@ -35,7 +35,6 @@ export default function Products() {
               <td className={isAlerte ? 'text-red-600 font-bold' : ''}>{produit.nom}</td>
               <td>{produit.categorie}</td>
               <td>{produit.stock}</td>
-              <td>{produit.prix_unitaire}</td>
               <td>
                 <Link to={`/produits/${produit.id}`} className="text-blue-600 underline">
                   Détails
