@@ -36,8 +36,14 @@ export default function Products() {
               <td>{produit.categorie}</td>
               <td>{produit.stock}</td>
               <td>
-                <Link to={`/produits/${produit.id}`} className="text-blue-600 underline">
+                <Link to={`/produits/${produit.id}`} className="text-blue-600 underline mr-2">
                   Détails
+                </Link>
+                <Link
+                  to={`/produits/${produit.id}/edit`}
+                  className="text-blue-600 hover:underline mr-2"
+                >
+                  Modifier
                 </Link>
               </td>
             </tr>
