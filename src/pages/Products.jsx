@@ -49,10 +49,10 @@ export default function Products() {
         <td>{produit.categorie}</td>
         <td>{produit.stock}</td>
         <td className="space-x-2">
-          <Link to={`/produits/${produit.id}`} className="text-blue-600 hover:underline">
+          <Link to={`/produits/${produit.id}`} className="bg-blue-600 text-white px-2 py-1 rounded">
             Voir
           </Link>
-          <Link to={`/produits/${produit.id}/edit`} className="text-yellow-600 hover:underline">
+          <Link to={`/produits/${produit.id}/edit`} className="bg-yellow-600 text-white px-2 py-1 rounded">
             Modifier
           </Link>
           <button
