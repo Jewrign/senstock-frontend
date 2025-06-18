@@ -17,7 +17,7 @@ export default function Header() {
     }, []);
   
   return (
-      <header className="bg-blue-700 text-white p-4 shadow">
+      <header className="bg-blue-700 text-white p-4 shadow flex justify-between items-center">
         <div className="text-xl font-bold">SenStock</div>
         <nav className="flex items-center gap-4">
                 <Link to="/alertes" className="relative hover:underline">
