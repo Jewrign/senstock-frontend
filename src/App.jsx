@@ -9,6 +9,7 @@ import ProductDetail from './pages/ProductDetail';
 import AddMovement from './pages/AddMovement';
 import Layout from './components/Layout';
 import Alertes from './pages/Alertes';
+import EditProduit from './pages/EditProduit';
 // import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -46,6 +47,10 @@ function App() {
         <Route
           path="/alertes"
           element={<Layout><Alertes /></Layout>}
+        />
+        <Route
+          path="/produits/:id/edit"
+          element={<Layout><EditProduit /></Layout>}
         />
       </Routes>
     </Router>
