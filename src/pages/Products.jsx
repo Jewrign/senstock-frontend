@@ -27,30 +27,47 @@ export default function Products() {
           </tr>
         </thead>
         <tbody>
-        {produits.map((produit) => {
-          const isAlerte = produit.stock <= produit.seuil_alerte;
+  {produits.map((produit) => {
+    const isAlerte = produit.stock <= produit.seuil_alerte;
 
-          return (
-            <tr key={produit.id} className={isAlerte ? 'bg-red-100' : ''}>
-              <td className={isAlerte ? 'text-red-600 font-bold' : ''}>{produit.nom}</td>
-              <td>{produit.categorie}</td>
-              <td>{produit.stock}</td>
-              <td>
-                <Link to={`/produits/${produit.id}`} className="text-blue-600 hover:underline mr-2">
-                  Détails
-                </Link>
-                <Link
-                  to={`/produits/${produit.id}/edit`}
-                  className="text-blue-600 hover:underline mr-2"
-                >
-                  Modifier
-                </Link>
-              </td>
-            </tr>
-          );
-        })}
+    const handleDelete = async () => {
+      const confirm = window.confirm(`Supprimer "${produit.nom}" ?`);
+      if (!confirm) return;
 
-        </tbody>
+      try {
+        await api.delete(`/produits/${produit.id}`);
+        setProduits(produits.filter(p => p.id !== produit.id));
+      } catch (error) {
+        alert("Erreur lors de la suppression");
+        console.error(error);
+      }
+    };
+
+    return (
+      <tr key={produit.id} className={isAlerte ? 'bg-red-50' : ''}>
+        <td className={`p-2 ${isAlerte ? 'text-red-600 font-bold' : ''}`}>{produit.nom}</td>
+        <td>{produit.categorie}</td>
+        <td>{produit.stock}</td>
+        <td>{produit.prix_unitaire}</td>
+        <td className="space-x-2">
+          <Link to={`/produits/${produit.id}`} className="text-blue-600 hover:underline">
+            Voir
+          </Link>
+          <Link to={`/produits/${produit.id}/edit`} className="text-yellow-600 hover:underline">
+            Modifier
+          </Link>
+          <button
+            onClick={handleDelete}
+            className="text-red-600 hover:underline"
+          >
+            Supprimer
+          </button>
+        </td>
+      </tr>
+    );
+  })}
+</tbody>
+
       </table>
     </div>
   );
