@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import api from '../services/api';
+import { Link } from 'react-router-dom';
 
 export default function Dashboard() {
   const [produits, setProduits] = useState([]);
@@ -34,9 +35,20 @@ export default function Dashboard() {
       <h1 className="text-2xl font-bold mb-4">Tableau de bord</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white p-4 shadow rounded text-center">Produits : {produits.length}</div>
-        <div className="bg-yellow-100 p-4 shadow rounded text-center">Alertes : {alertes.length}</div>
-        <div className="bg-blue-100 p-4 shadow rounded text-center">Mouvements : {mouvements.length}</div>
+        <Link to="/produits" className="bg-white shadow p-4 rounded hover:bg-gray-50 transition">
+          <h3 className="text-xl font-semibold">Produits</h3>
+          <p>{produits.length} en stock</p>
+        </Link>
+
+        <Link to="/alertes" className="bg-white shadow p-4 rounded hover:bg-gray-50 transition">
+          <h3 className="text-xl font-semibold text-red-600">Alertes</h3>
+          <p>{alertes.length} en alerte</p>
+        </Link>
+
+        <Link to="/mouvements" className="bg-white shadow p-4 rounded hover:bg-gray-50 transition">
+          <h3 className="text-xl font-semibold">Mouvements</h3>
+          <p>Voir les derniers mouvements</p>
+        </Link>
       </div>
 
       <div>

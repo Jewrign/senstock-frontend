@@ -8,6 +8,7 @@ import AddProduct from './pages/AddProduct';
 import ProductDetail from './pages/ProductDetail';
 import AddMovement from './pages/AddMovement';
 import Layout from './components/Layout';
+import Alertes from './pages/Alertes';
 // import PrivateRoute from './components/PrivateRoute';
 
 function App() {
@@ -42,6 +43,10 @@ function App() {
           element={<Layout><Mouvements /></Layout>}
         />
         <Route path="/" element={<Navigate to="/dashboard" />} />
+        <Route
+          path="/alertes"
+          element={<Layout><Alertes /></Layout>}
+        />
       </Routes>
     </Router>
   );
