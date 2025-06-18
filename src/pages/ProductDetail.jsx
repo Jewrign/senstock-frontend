@@ -43,12 +43,12 @@ export default function ProductDetail() {
         <p><strong>Prix unitaire :</strong> {produit.prix_unitaire} F CFA</p>
         <p><strong>Seuil d’alerte :</strong> {produit.seuil_alerte}</p>
 
-        <Link to={`/produits/${id}/mouvement`} className="inline-block mt-4 bg-blue-600 text-white px-4 py-2 rounded">Add commentMore actions
+        <Link to={`/produits/${id}/mouvement`} className="inline-block mt-4 bg-blue-600 text-white px-4 py-2 rounded">
           Ajouter Mouvement
         </Link>
       </div>  
 
-      <h2 className="text-xl font-bold mb-2">Historique des mouvements</h2>Add commentMore actions
+      <h2 className="text-xl font-bold mb-2">Historique des mouvements</h2>
       <table className="w-full bg-white shadow text-center">
         <thead className="bg-gray-100">
           <tr>
