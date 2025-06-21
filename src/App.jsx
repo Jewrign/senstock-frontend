@@ -47,7 +47,7 @@ function App() {
           path="/mouvements"
           element={<Layout><Mouvements /></Layout>}
         />
-        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/" element={<Navigate to="/register" />} />
         <Route
           path="/alertes"
           element={<Layout><Alertes /></Layout>}
