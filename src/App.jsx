@@ -43,7 +43,7 @@ function App() {
           path="/mouvements"
           element={<Layout><Mouvements /></Layout>}
         />
-        <Route path="/" element={<Navigate to="/dashboard" />} />
+        <Route path="/" element={<Navigate to="/login" />} />
         <Route
           path="/alertes"
           element={<Layout><Alertes /></Layout>}
