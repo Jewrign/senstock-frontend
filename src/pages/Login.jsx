@@ -1,28 +1,35 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api, { initCsrf } from '../services/api';
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [form, setForm] = useState({ email: '', password: '' });
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     try {
-      const res = await axios.post('http://localhost:8000/api/login', { email, password });
-      localStorage.setItem('token', res.data.token);
+      await initCsrf();
+      await api.post('/login', form);
       navigate('/dashboard');
     } catch (err) {
-      alert('Connexion échouée');
+      setError(err.response?.data?.message || 'Connexion échouée');
     }
   };
 
   return (
-    <form onSubmit={handleLogin} className="max-w-md mx-auto mt-20 space-y-4">
-      <input className="w-full p-2 border rounded" type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-      <input className="w-full p-2 border rounded" type="password" placeholder="Mot de passe" onChange={(e) => setPassword(e.target.value)} />
-      <button className="w-full p-2 bg-blue-600 text-white rounded" type="submit">Se connecter</button>
-    </form>
+    <div className="max-w-md mx-auto mt-10 p-6 shadow bg-white rounded">
+      <h1 className="text-xl font-bold mb-4">Connexion</h1>
+      {error && <p className="text-red-600">{error}</p>}
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input type="email" name="email" placeholder="Email" onChange={handleChange} className="w-full border p-2" required />
+        <input type="password" name="password" placeholder="Mot de passe" onChange={handleChange} className="w-full border p-2" required />
+        <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Se connecter</button>
+      </form>
+    </div>
   );
 }

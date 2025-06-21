@@ -1,28 +1,36 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api, { initCsrf } from '../services/api';
 
 export default function Register() {
-  const [form, setForm] = useState({ name: '', email: '', password: '', password_confirmation: '' });
+  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleRegister = async (e) => {
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     try {
-      await axios.post('http://localhost:8000/api/register', form);
-      navigate('/login');
+      await initCsrf();
+      await api.post('/register', form);
+      navigate('/dashboard');
     } catch (err) {
-      alert("Erreur d'inscription");
+      setError(err.response?.data?.message || 'Erreur lors de l’inscription');
     }
   };
 
   return (
-    <form onSubmit={handleRegister} className="max-w-md mx-auto mt-10 space-y-4">
-      <input name="name" placeholder="Nom" onChange={(e) => setForm({...form, name: e.target.value})} className="w-full p-2 border rounded" />
-      <input name="email" placeholder="Email" onChange={(e) => setForm({...form, email: e.target.value})} className="w-full p-2 border rounded" />
-      <input name="password" type="password" placeholder="Mot de passe" onChange={(e) => setForm({...form, password: e.target.value})} className="w-full p-2 border rounded" />
-      <input name="password_confirmation" type="password" placeholder="Confirmer" onChange={(e) => setForm({...form, password_confirmation: e.target.value})} className="w-full p-2 border rounded" />
-      <button type="submit" className="w-full bg-green-600 text-white p-2 rounded">S'inscrire</button>
-    </form>
+    <div className="max-w-md mx-auto mt-10 p-6 shadow bg-white rounded">
+      <h1 className="text-xl font-bold mb-4">Inscription</h1>
+      {error && <p className="text-red-600">{error}</p>}
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input type="text" name="name" placeholder="Nom" onChange={handleChange} className="w-full border p-2" required />
+        <input type="email" name="email" placeholder="Email" onChange={handleChange} className="w-full border p-2" required />
+        <input type="password" name="password" placeholder="Mot de passe" onChange={handleChange} className="w-full border p-2" required />
+        <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">S’inscrire</button>
+      </form>
+    </div>
   );
 }
