@@ -14,10 +14,15 @@ export default function Register() {
     setError('');
     try {
       await initCsrf();
-      await api.post('/register', form);
-      navigate('/dashboard');
+      const response = await api.post('/register', form);
+      if (response.status === 201) {
+        navigate('/dashboard');
+      } else {
+        throw new Error('Inscription échouée');
+      }
     } catch (err) {
       setError(err.response?.data?.message || 'Erreur lors de l’inscription');
+      console.error('Erreur d’inscription:', err);
     }
   };
 

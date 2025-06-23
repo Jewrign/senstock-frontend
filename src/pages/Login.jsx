@@ -14,10 +14,15 @@ export default function Login() {
     setError('');
     try {
       await initCsrf();
-      await api.post('/login', form);
-      navigate('/dashboard');
+      const response = await api.post('/login', form);
+      if (response.status === 200) {
+        navigate('/dashboard');
+      } else {
+        throw new Error('Connexion échouée');
+      }
     } catch (err) {
       setError(err.response?.data?.message || 'Connexion échouée');
+      console.error('Erreur de connexion:', err);
     }
   };
 
