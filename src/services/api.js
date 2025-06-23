@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://senstock-backend.onrender.com/api',
+  baseURL: 'https://senstock-backend.onrender.com',
   withCredentials: true,
   headers: {
     'Accept': 'application/json',
