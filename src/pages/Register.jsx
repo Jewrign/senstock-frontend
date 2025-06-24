@@ -14,9 +14,9 @@ export default function Register() {
     setError('');
     try {
       await initCsrf();
-      const response = await api.post('/api/register', form);
+      const response = await api.post('/register', form);
       if (response.status === 201) {
-        navigate('/api/dashboard');
+        navigate('/dashboard');
       } else {
         throw new Error('Inscription échouée');
       }
