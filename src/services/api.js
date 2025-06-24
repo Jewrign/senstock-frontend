@@ -22,8 +22,9 @@ api.interceptors.request.use(config => {
   return config;
 });
 
-export async function initCsrf() {
-  await api.get('/sanctum/csrf-cookie');
-}
+export const initCsrf = () =>
+  axios.get('https://senstock-backend.onrender.com/sanctum/csrf-cookie', {
+    withCredentials: true,
+  });
 
 export default api;
