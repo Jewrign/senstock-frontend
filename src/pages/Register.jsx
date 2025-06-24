@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api, { initCsrf } from '../services/api';
 
 export default function Register() {
@@ -35,6 +35,7 @@ export default function Register() {
         <input type="email" name="email" placeholder="Email" onChange={handleChange} className="w-full border p-2" required />
         <input type="password" name="password" placeholder="Mot de passe" onChange={handleChange} className="w-full border p-2" required />
         <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">S’inscrire</button>
+        <Link to="/login" className="text-blue-600 hover:underline">Déjà inscrit ?</Link>
       </form>
     </div>
   );
